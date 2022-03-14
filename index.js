@@ -2,8 +2,28 @@ const list = document.querySelectorAll("ul li");
 
 list.forEach((node) => {
   node.addEventListener("mousedown", function (event) {
-    event.preventDefault();
     const value = node.innerText.trim();
-    console.log(value);
+
+    const result = document.querySelector(".results");
+    // result.innerText = value;
+
+    const resultText = result.innerText.trim();
+
+    if (resultText == "0" || resultText == "Infinity" || resultText == "undefined") {
+      result.innerText = "";
+    }
+
+    if (value == "=") {
+      let solution = eval(resultText);
+      result.innerText = solution;
+      return true;
+    }
+
+    if (value.toLowerCase() == "c") {
+      result.innerText = "0";
+      return true;
+    }
+
+    result.append(value);
   });
 });
